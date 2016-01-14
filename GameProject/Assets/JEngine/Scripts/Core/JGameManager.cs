@@ -11,12 +11,14 @@ internal class JGameManager
 
     private List<string> _gameModeList = null;
     private JGameMode _currentGameMode = null;
+	private Dictionary<string, System.Object> _parameters = null;
     #endregion
 
     #region Class Methods
     internal JGameManager()
     {
         _gameModeList = new List<string>();
+		_parameters = new Dictionary<string, System.Object> ();
     }
 
     internal void Manage()
@@ -53,5 +55,17 @@ internal class JGameManager
             _currentGameMode.Exit();
 		SceneManager.LoadScene(a_gameModeName, LoadSceneMode.Single);
     }
+
+	internal void SetParameter(string a_paramName, System.Object a_paramValue)
+	{
+		_parameters [a_paramName] = a_paramValue;
+	}
+
+	internal System.Object GetParamter(string a_paramName)
+	{
+		System.Object value = null;
+		_parameters.TryGetValue (a_paramName, out value);
+		return value;
+	}
     #endregion
 }

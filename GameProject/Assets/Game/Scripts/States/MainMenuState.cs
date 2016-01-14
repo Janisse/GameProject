@@ -25,7 +25,7 @@ public class MainMenuState : JState
 	#region Event Methods
 	internal void OnPlayClicked(JEventArgs args)
 	{
-		JEngine.Instance.gameManager.changeGameMode ("FPSGameMode");
+		currentGameMode.RequestState ("SelectLevelState");
 	}
 	#endregion
 }
