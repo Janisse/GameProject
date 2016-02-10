@@ -7,7 +7,6 @@ internal class JGameManager
 {
     #region Properties
 	internal int currentLevelID = 1;
-	internal int deathNb = 0;
 
     private List<string> _gameModeList = null;
     private JGameMode _currentGameMode = null;

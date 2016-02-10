@@ -19,6 +19,8 @@ public class Character : MonoBehaviour
 		currentWeapon.transform.localPosition = currentWeapon.weaponInitPos;
 		currentWeapon.transform.localRotation = Quaternion.Euler(currentWeapon.weaponInitRot);
 	}
+
+	internal virtual void Manage() {}
 	#endregion
 
 	#region Character Methods

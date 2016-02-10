@@ -6,6 +6,7 @@ public abstract class JState : MonoBehaviour
 {
     #region Properties
     public string[] panelToDisplay = new string[0];
+	public bool isPausable = false;
 
     protected JGameMode currentGameMode = null;
     #endregion

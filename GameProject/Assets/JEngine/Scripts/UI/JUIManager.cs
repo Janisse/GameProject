@@ -116,7 +116,8 @@ internal class JUIManager
     {
         foreach (JPanel panel in currentShowedPanelList)
         {
-            HidePanel(panel.name);            
+			if (panel != null)
+				HidePanel (panel.name);
         }
     }
 

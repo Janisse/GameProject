@@ -3,20 +3,20 @@ using System.Collections;
 
 public class JEventArgs {
 	#region Properties
-	internal Object objArg;
+	internal System.Object objArg;
 	internal string strArg;
 	internal float floatArg;
     #endregion
 
     #region Class Methods
-    internal JEventArgs(Object a_objArg, string a_strArg = "", float a_floatArg = 0f)
+	internal JEventArgs(System.Object a_objArg, string a_strArg, float a_floatArg = 0f)
     {
         objArg = a_objArg;
         strArg = a_strArg;
         floatArg = a_floatArg;
     }
 
-    internal JEventArgs(Object a_objArg, float a_floatArg = 0f)
+	internal JEventArgs(System.Object a_objArg, float a_floatArg = 0f)
     {
         objArg = a_objArg;
         strArg = "";

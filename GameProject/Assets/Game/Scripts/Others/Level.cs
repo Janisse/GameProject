@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Level : MonoBehaviour
 {
 	#region Properties
 	public Transform playerSpawn = null;
+
+	internal List<EnemyCharacter> enemyList = null;
 
 	private FPSGameMode _currentGameMode = null;
 	#endregion
@@ -20,8 +23,31 @@ public class Level : MonoBehaviour
 		_currentGameMode.player.transform.position = playerSpawn.position;
 		_currentGameMode.player.transform.rotation = playerSpawn.rotation;
 
+		//Init EnemyList
+		enemyList = new List<EnemyCharacter>();
+
 		//Level is Loaded
 		JEngine.Instance.eventManager.FireEvent("LevelLoaded");
+	}
+	#endregion
+
+	#region Enemy Methods
+	internal void RegisterEnemy(EnemyCharacter a_enemy)
+	{
+		enemyList.Add (a_enemy);
+	}
+
+	internal void UnregisterEnemy(EnemyCharacter a_enemy)
+	{
+		enemyList.Remove (a_enemy);
+	}
+
+	internal void ManageEnemies()
+	{
+		foreach(EnemyCharacter enemy in enemyList)
+		{
+			enemy.Manage ();
+		}
 	}
 	#endregion
 }

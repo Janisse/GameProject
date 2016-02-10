@@ -21,18 +21,23 @@ public class GameFPSState : JState
 
 		//Events
 		JEngine.Instance.eventManager.RegisterEvent ("PointChange", PointChange);
+		JEngine.Instance.eventManager.RegisterEvent ("Pause", PauseEvent);
 	}
 	
 	internal override void Manage()
 	{
 		base.Manage();
-		player.charactMotor.Manage ();
-		CheckUserActions ();
+		if(!currentGameMode.isPaused)
+		{
+			player.charactMotor.Manage ();
+			CheckUserActions ();
+		}
 	}
 	
 	internal override void Exit()
 	{
 		JEngine.Instance.eventManager.UnregisterEvent ("PointChange", PointChange);
+		JEngine.Instance.eventManager.UnregisterEvent ("Pause", PauseEvent);
 		base.Exit();
 	}
 	#endregion
@@ -71,6 +76,20 @@ public class GameFPSState : JState
 	{
 		point += (int)a_args.floatArg;
 		_playHUDPanel.SetPointText (point.ToString());
+	}
+
+	internal void PauseEvent(JEventArgs a_args)
+	{
+		if(currentGameMode.isPaused)
+		{
+			JEngine.Instance.uiManager.ShowPanel ("PausePanel");
+			Time.timeScale = 0f;
+		}
+		else
+		{
+			JEngine.Instance.uiManager.HidePanel ("PausePanel");
+			Time.timeScale = 1f;
+		}
 	}
 	#endregion
 }

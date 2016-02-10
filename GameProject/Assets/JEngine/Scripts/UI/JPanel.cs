@@ -68,7 +68,7 @@ public class JPanel : MonoBehaviour
             {
                 timeLeft += Time.unscaledDeltaTime;
                 canvasGroup.alpha = transitionCurve.Evaluate(timeLeft / transitionDuration);
-                yield return new WaitForFixedUpdate();
+				yield return new WaitForEndOfFrame();
             }
         }
         else
@@ -77,7 +77,7 @@ public class JPanel : MonoBehaviour
             {
                 timeLeft += Time.unscaledDeltaTime;
                 canvasGroup.alpha = transitionCurve.Evaluate(1f - (timeLeft / transitionDuration));
-                yield return new WaitForFixedUpdate();
+				yield return new WaitForEndOfFrame();
             }
             canvasGroup.blocksRaycasts = false;
         }

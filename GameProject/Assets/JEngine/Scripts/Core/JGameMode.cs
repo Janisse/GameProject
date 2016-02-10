@@ -9,6 +9,7 @@ public class JGameMode : MonoBehaviour
     public JState[] stateTab = new JState[0];
     public string[] panelToLoadTab = new string[0];
 
+	internal bool isPaused = false;
 
     private Dictionary<string, JState> _stateDict = null;
     private JState _currentState = null;
@@ -38,10 +39,16 @@ public class JGameMode : MonoBehaviour
         StartCoroutine(LoadFirstState());
     }
 
-    internal void Manage()
+	internal virtual void Manage()
     {
-        if(_currentState != null)
-            _currentState.Manage();
+		if(_currentState != null)
+		{
+			if(!(_currentState.isPausable && isPaused))
+			{
+		    	_currentState.Manage();
+			}
+			PauseManagement ();
+		}
     }
 
     internal virtual void Exit()
@@ -72,5 +79,17 @@ public class JGameMode : MonoBehaviour
         //Load First State
         RequestState(firstState.GetType().Name);
     }
+
+	internal void PauseManagement()
+	{
+		if(_currentState.isPausable)
+		{
+			if (Input.GetKeyDown (KeyCode.Escape))
+			{
+				isPaused = !isPaused;
+				JEngine.Instance.eventManager.FireEvent ("Pause");
+			}
+		}
+	}
     #endregion
 }
